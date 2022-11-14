@@ -30,7 +30,8 @@ const port = 3000;
 app.post('/api', async (req, res)=>{
   const name=req.query.name
   const fname = req.query.fname ?? " ";
-  const dob = req.query.dob.split("-"); // YYYY-MM-DD
+  const age = req.query.age;
+  const dob = req.query.dob; // YYYY-MM-DD
   const gender=req.query.gender ?? null; // M or F or O
   const state=req.query.state; // Take STATE_CODE as input;
   const district =req.query.dist ?? null; // Take DIST_CODE as input;
@@ -38,9 +39,8 @@ app.post('/api', async (req, res)=>{
   const [dist, ac, pn, correctName] = await scraper("https://electoralsearch.in/", {
     name,
     fname,
-    year: dob[0],
-    month: dob[1],
-    day: parseInt(dob[2]).toString(),
+    age,
+    dob,
     gender,
     state,
     dist: district
@@ -126,6 +126,7 @@ app.post('/api', async (req, res)=>{
 
   await fs.readFile(`translated-${time_now}.txt`, 'utf8', function(err, data) {
     if (err) throw err;
+    console.log(correctName)
     const tree = findTree(data, correctName);
     console.log(tree);
     res.send(tree);

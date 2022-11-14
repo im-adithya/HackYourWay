@@ -7,10 +7,15 @@ async function enterInfo(page, data){
   await page.type('input#name1', data.name);
   await page.type('input#txtFName', data.fname);
   await page.locator('#nameStateList').selectOption(data.state);
-  await page.locator('input#radDob').click();
-  await page.locator('#yearList').selectOption({label: data.year}); // "2002"
-  await page.locator('#monthList').selectOption(data.month); // "04"
-  await page.locator('#dayList').selectOption({label: data.day}); // "20"
+  if (!data.age) {
+    const dob = data.dob.split("-");
+    await page.locator('input#radDob').click();
+    await page.locator('#yearList').selectOption({label: dob[0]}); // "2002"
+    await page.locator('#monthList').selectOption(dob[1]); // "04"
+    await page.locator('#dayList').selectOption({label: parseInt(dob[2]).toString()}); // "20"
+  } else {
+    await page.locator('#ageList').selectOption({label: data.age}); // "20"
+  }
   if (data.gender)
     await page.locator('#listGender').selectOption(data.gender);
   if (data.district) {
@@ -25,6 +30,7 @@ async function captchaSubmit(page){
   await element.screenshot({
     path: `images/captcha-${time_now}.jpg`
   });
+  await page.type('input#txtCaptcha', '');
   const text = await captcha(`images/captcha-${time_now}.jpg`);
   fs.unlinkSync(`images/captcha-${time_now}.jpg`)
   await page.type('input#txtCaptcha', text);
