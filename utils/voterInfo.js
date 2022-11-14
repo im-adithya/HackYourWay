@@ -28,11 +28,11 @@ async function captchaSubmit(page){
   const time_now = Date.now();
   const element = await page.$("#captchaDetailImg");
   await element.screenshot({
-    path: `/home/ubuntu/Code/images/captcha-${time_now}.jpg`
+    path: `/home/ubuntu/images/captcha-${time_now}.jpg`
   });
   await page.type('input#txtCaptcha', '');
-  const text = await captcha(`/home/ubuntu/Code/images/captcha-${time_now}.jpg`);
-  fs.unlinkSync(`/home/ubuntu/Code/images/captcha-${time_now}.jpg`)
+  const text = await captcha(`/home/ubuntu/images/captcha-${time_now}.jpg`);
+  fs.unlinkSync(`/home/ubuntu/images/captcha-${time_now}.jpg`)
   await page.type('input#txtCaptcha', text);
   await page.locator('#tab1 #btnDetailsSubmit').click();
   
