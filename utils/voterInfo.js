@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require("axios") ;
 const fs = require("fs");
 const { chromium } = require('playwright');
 const captcha = require('./captcha');
