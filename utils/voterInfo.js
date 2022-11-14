@@ -83,9 +83,11 @@ async function linkScraper(URL, data){
     await page.waitForTimeout(2000);
     let pages = await browserContext.pages();
 
+    const nameLocator = await pages[1].locator("#name+td");
     const acLocator = await pages[1].locator("#ac_name+td");
     const pnLocator = await pages[1].locator("#part_no+td");
 
+    const nameText = await nameLocator.allInnerTexts();
     const acText = await acLocator.allInnerTexts();
     const pnText = await pnLocator.allInnerTexts();
 
@@ -98,7 +100,7 @@ async function linkScraper(URL, data){
     if (data.state === "S20") dist = distName;
     if (data.state === "S16") ac = acArr[1];
 
-    return [dist, ac, pn];
+    return [dist, ac, pn, nameText[0]];
 	}
 	catch(err){
 		console.log("Could not resolve the browser instance => ", err);

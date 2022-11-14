@@ -14,22 +14,13 @@ const CONFIG = {
 const client = new ImageAnnotatorClient(CONFIG);
 const translate = new Translate(CONFIG);
 
-function findTree(data, name) {
-  data = data.toUpperCase();
-  name = name.toUpperCase();
-  const reg = new RegExp(':[^:]*?[\n]','g');
-  let arr = data.match(reg).map(item => item.slice(2, item.length-1));
-  const nameIndex = arr.indexOf(name);
-  console.log(arr[nameIndex+1]);
-}
-
 async function translateText(data) {
   let [translations] = await translate.translate(data, 'en');
   translations = Array.isArray(translations) ? translations : [translations];
   return translations[0];
 }
 
-async function pdfToText(filePath, time_now) {
+async function pdfToText(filePath, name, time_now) {
   let pdfArray = await pdf2img.convert(filePath);
   let data;
   const pages = pdfArray.length;
@@ -41,11 +32,10 @@ async function pdfToText(filePath, time_now) {
 
   for (let index = 1; index <= batches; index++) {
     data += await batchAnnotateFiles(filePath, pageArr.splice(0,5))
-    console.log("batch done!")
+    console.log(`batch ${index}/${batches} done!`)
   }
 
-  findTree(data, "adithya vardhan");
-  fs.writeFile(`translated-${time_now}.txt`, data, function (err) {
+  await fs.writeFile(`translated-${time_now}.txt`, data, function (err) {
     if (err) return console.log(err);
   });
 }
@@ -77,4 +67,4 @@ async function batchAnnotateFiles(fileName, pages) {
 }
 
 module.exports = pdfToText;
-//pdfToText('wbgov.pdf');
+// pdfToText('state-1668396632952.pdf', "Hayad khan");

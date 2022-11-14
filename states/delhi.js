@@ -42,11 +42,11 @@ async function generatePath(ac, pn){
 }
 
 // https://ceoaperolls.ap.gov.in/AP_Eroll_2023/Popuppage?partNumber=141&roll=EnglishMotherRoll&districtName=DIST_15&acname=106&acnameeng=A106&acno=106&acnameurdu=106
-async function delhi(ac, pn){
+async function delhi(name, ac, pn, time_now){
 
   const path = await generatePath(ac, pn);
 
-  await requestPauser("https://ceodelhi.gov.in" + path, captchaHandling);
+  await requestPauser("https://ceodelhi.gov.in" + path, captchaHandling, name, time_now);
   // Do somehting with pdf [take epic id too above]
 }
 

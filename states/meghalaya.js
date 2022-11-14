@@ -4,7 +4,7 @@ async function captchaHandling(page, link, time_now) {
   await page.goto(link);
 }
 
-async function meghalaya(ac, pn) {
+async function meghalaya(name, ac, pn, time_now) {
     // TODO : INPUT ac AND pn AS STRINGS
   // TODO: ac is 3 digit and pn is 4 digit
   // dist is null
@@ -14,7 +14,7 @@ async function meghalaya(ac, pn) {
     .toString()
     .padStart(4, "0")}.pdf`;
 
-  await requestPauser(URL, captchaHandling);
+  await requestPauser(URL, captchaHandling, name, time_now);
   // Do somehting with pdf [take epic id too above]
 }
 

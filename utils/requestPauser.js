@@ -3,8 +3,7 @@ const fs = require("fs");
 // const pdfToImg = require("./pdftoimg")
 const pdfToText=require('./fileOCR')
 
-async function requestPauser(link, captchaHandling) {
-  const time_now = Date.now();
+async function requestPauser(link, captchaHandling, name, time_now) {
   const browser = await chromium.launch({
     headless: false,
   });
@@ -100,7 +99,7 @@ async function requestPauser(link, captchaHandling) {
   await browser.close();
 
   // await pdfToImg(`state-${time_now}.pdf`)
-  await pdfToText(`state-${time_now}.pdf`, time_now);
+  return await pdfToText(`state-${time_now}.pdf`, name, time_now);
 };
 
 module.exports = requestPauser;
