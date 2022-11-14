@@ -67,4 +67,4 @@ async function batchAnnotateFiles(fileName, pages) {
 }
 
 module.exports = pdfToText;
-// pdfToText('state-1668396632952.pdf', "Hayad khan");
+// pdfToText('/home/ubuntu/Code/state-1668396632952.pdf', "Hayad khan");

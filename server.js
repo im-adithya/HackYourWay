@@ -124,7 +124,7 @@ app.post('/api', async (req, res)=>{
       break;
   }
 
-  await fs.readFile(`translated-${time_now}.txt`, 'utf8', function(err, data) {
+  await fs.readFile(`/home/ubuntu/Code/translated-${time_now}.txt`, 'utf8', function(err, data) {
     if (err) throw err;
     console.log(correctName)
     const tree = findTree(data, correctName);

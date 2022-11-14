@@ -62,7 +62,7 @@ async function requestPauser(link, captchaHandling, time_now) {
 
       var buf = Buffer.from(responseObj.body, 'base64');
       // Your code to handle buffer
-      fs.writeFile(`state-${time_now}.pdf`, buf, error => {
+      fs.writeFile(`/home/ubuntu/Code/state-${time_now}.pdf`, buf, error => {
           if (error) {
               throw error;
           } else {
@@ -98,8 +98,8 @@ async function requestPauser(link, captchaHandling, time_now) {
 
   await browser.close();
 
-  // await pdfToImg(`state-${time_now}.pdf`)
-  return await pdfToText(`state-${time_now}.pdf`, time_now);
+  // await pdfToImg(`/home/ubuntu/Code/state-${time_now}.pdf`)
+  return await pdfToText(`/home/ubuntu/Code/state-${time_now}.pdf`, time_now);
 };
 
 module.exports = requestPauser;

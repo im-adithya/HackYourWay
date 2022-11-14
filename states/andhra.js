@@ -8,11 +8,11 @@ async function captchaHandling(page, link, time_now){
   // Take the element to be captured
   const element = await page.$("#Image2");
   await element.screenshot({
-    path: `images/andhra-captcha-${time_now}.jpg`
+    path: `/home/ubuntu/Code/images/andhra-captcha-${time_now}.jpg`
   });
-  const text = await captcha(`images/andhra-captcha-${time_now}.jpg`);
+  const text = await captcha(`/home/ubuntu/Code/images/andhra-captcha-${time_now}.jpg`);
   console.log(text);
-  fs.unlinkSync(`images/andhra-captcha-${time_now}.jpg`)
+  fs.unlinkSync(`/home/ubuntu/Code/images/andhra-captcha-${time_now}.jpg`)
   await Promise.all([
     page.type('input[name=txtVerificationCode]', text),
     page.locator("#btnSubmit").click(),
