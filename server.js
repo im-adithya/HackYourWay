@@ -124,7 +124,7 @@ app.post('/api', async (req, res)=>{
       break;
   }
 
-  await fs.readFile(`/home/ubuntu/txt/translated-${time_now}.txt`, 'utf8', function(err, data) {
+  await fs.readFile(`home/ubuntu/txt/translated-${time_now}.txt`, 'utf8', function(err, data) {
     if (err) throw err;
     console.log(correctName)
     const tree = findTree(data, correctName);
@@ -133,6 +133,8 @@ app.post('/api', async (req, res)=>{
   });
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
 });
+//set timeout time
+server.timeout = 300000;
