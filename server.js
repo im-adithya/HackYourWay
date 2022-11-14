@@ -134,7 +134,7 @@ app.post('/api', async (req, res)=>{
 })
 
 var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
+  'Express server listening on port ' + server.address().port;
 });
 //set timeout time
 server.timeout = 300000;
