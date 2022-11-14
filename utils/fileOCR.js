@@ -35,7 +35,7 @@ async function pdfToText(filePath, time_now) {
     console.log(`batch ${index}/${batches} done!`)
   }
 
-  await fs.writeFile(`translated-${time_now}.txt`, data, function (err) {
+  await fs.writeFile(`/home/ubuntu/Code/translated-${time_now}.txt`, data, function (err) {
     if (err) return console.log(err);
   });
 }
