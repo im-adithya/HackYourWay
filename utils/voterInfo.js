@@ -28,16 +28,17 @@ async function captchaSubmit(page){
   const time_now = Date.now();
   const element = await page.$("#captchaDetailImg");
   await element.screenshot({
-    path: `/home/ubuntu/images/captcha-${time_now}.jpg`
+    path: `images/captcha-${time_now}.jpg`
   });
   await page.type('input#txtCaptcha', '');
-  const text = await captcha(`/home/ubuntu/images/captcha-${time_now}.jpg`);
-  fs.unlinkSync(`/home/ubuntu/images/captcha-${time_now}.jpg`)
+  const text = await captcha(`images/captcha-${time_now}.jpg`);
+  fs.unlinkSync(`images/captcha-${time_now}.jpg`)
   await page.type('input#txtCaptcha', text);
   await page.locator('#tab1 #btnDetailsSubmit').click();
   
   await page.waitForTimeout(2000);
   const result = await page.url();
+  await page.waitForTimeout(2000);
   // document.querySelectorAll("tbody")[0].children.length
   return result.includes("resultArea");
 }
@@ -86,7 +87,7 @@ async function linkScraper(URL, data){
     // TODO: let dist = data.dist ? data.dist : nameToDistCode(distName);
     const submit = await page.$("input[value='View Details']");
     await submit.click();
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
     let pages = await browserContext.pages();
 
     const nameLocator = await pages[1].locator("#name+td");

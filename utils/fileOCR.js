@@ -35,7 +35,7 @@ async function pdfToText(filePath, time_now) {
     console.log(`batch ${index}/${batches} done!`)
   }
 
-  await fs.writeFile(`/home/ubuntu/txt/translated-${time_now}.txt`, data, function (err) {
+  await fs.writeFile(`translated-${time_now}.txt`, data, function (err) {
     if (err) return console.log(err);
   });
 }
@@ -67,4 +67,4 @@ async function batchAnnotateFiles(fileName, pages) {
 }
 
 module.exports = pdfToText;
-// pdfToText('/home/ubuntu/pdfs/state-1668396632952.pdf', "Hayad khan");
+// pdfToText('state-1668396632952.pdf', "Hayad khan");

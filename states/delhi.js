@@ -10,11 +10,11 @@ async function captchaHandling(page, link, time_now, obj){
   // Take the element to be captured
   const element = await page.$("#ContentPlaceHolder1_imgCaptcha");
   await element.screenshot({
-    path: `/home/ubuntu/images/delhi-captcha-${time_now}.jpg`
+    path: `images/delhi-captcha-${time_now}.jpg`
   });
-  const text = await captcha(`/home/ubuntu/images/delhi-captcha-${time_now}.jpg`);
+  const text = await captcha(`images/delhi-captcha-${time_now}.jpg`);
   console.log(text);
-  fs.unlinkSync(`/home/ubuntu/images/delhi-captcha-${time_now}.jpg`)
+  fs.unlinkSync(`images/delhi-captcha-${time_now}.jpg`)
   // await page.type('input[name=txtVerificationCode]', text);
   // await page.$("#btnSubmit").click();
   // delete image
